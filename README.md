@@ -1,49 +1,89 @@
-## 更新日志
-**5月23日在serializer文件夹中新增实体文件，方便统一响应格式**
+# 极简抖音后端API设计
+## 项目说明
+2022年字节青训营后端实践项目之一。
 
+项目源地址：https://github.com/vlinglandy/qxy-dou-yin
+
+[题目链接](https://bytedance.feishu.cn/docx/doxcnbgkMy2J0Y3E6ihqrvtHXPg)
+
+本项目为团队合作开发，陌生人线上组队基本看运气，组长的负责度与组织力直接决定了项目的成败。我时间并不充裕，所以一开始组队时便决定不担任组长，找个队伍配合开发即可。
+
+团队为6人小组，代码贡献者为4人，另两人负责文档撰写,他们写的[文档](https://juejin.cn/post/7108422690553200670)~（建议不要点开）
 
 ## 目录结构
 
-1. api文件夹就是MVC框架的controller，负责协调各部件完成任务
-2. model文件夹负责存储数据库模型和数据库操作相关的代码
-3. service负责处理比较复杂的业务（可能用不到，为了简化）
-4. util一些通用的小工具
-5. conf放一些静态存放的配置文件
-6. public放视频和图片，音频等的静态资源目录
-7. e-r.png是数据库的e-r图
-8. .env是环境配置，如果想修改数据库连接则改这里
-9. middleware是中间件，用于登陆验证，跨域操作
-10. serializer准备放一些序列化统一格式的操作，暂时还没写好
-11. server放要挂载的路由
-
-## 项目运行流程
-1. 首先进入main.go
-2. 然后在conf.go中初始化数据库链接
-3. 接下来挂载路由，去server/router.go中
-4. 现在我已经写好了基本的路由框架，你们就专注于每个路由对应的api函数具体实现就可以了
-
-## 写一个接口的流程
-1. 首先看自己负责的路由调用的函数
-2. 然后看接口的入参和响应
-3. 根据响应格式写结构体
-4. 在自己的api中调用的函数写代码
-
-## 我写了两个demo可以在router文件和api文件看到，照着写就行
-
-
-## 环境
-
-项目在启动的时候依赖以下环境变量，但是也可以在项目根目录创建.env文件设置环境变量便于使用(建议开发环境使用)
 
 ```
-MYSQL_DSN="qxy_dy:123456@tcp(47.95.23.74:3306)/qxy_dy?charset=utf8&parseTime=True&loc=Local" # Mysql连接地址
-SESSION_SECRET="womeishijiuchiliuliumei" # Seesion密钥，必须设置而且不要泄露
-GIN_MODE="debug"
+│  .env
+│  .gitignore
+│  e-r.png
+│  ffmpeg.exe
+│  go.mod
+│  go.sum
+│  main.go
+│  README.md
+│
+├─api            
+│      comment.go
+│      demo.go
+│      favorite.go
+│      feed.go
+│      main.go
+│      publish.go
+│      relation.go
+│      user.go
+│
+├─auth
+│      .keep
+│
+├─conf
+│      conf.go
+│
+├─middleware
+│      auth.go
+│      cors.go
+│
+├─model
+│      comment.go
+│      favorite.go
+│      follow.go
+│      init.go
+│      migration.go
+│      user.go
+│      video.go
+│
+├─public
+│      0_VID_20220613_150918.jpeg
+│      0_VID_20220613_150918.mp4
+│
+├─serializer
+│      common.go
+│      entity.go
+│
+├─server
+│      router.go
+│
+└─util
+        common.go
+        logger.go
 ```
+1. api           MVC框架的controller，负责协调各部件完成任务
+2. model         存储数据库模型和数据库操作相关的代码
+3. util          通用的工具
+4. conf          环境配置初始化
+5. public        静态资源目录
+6. e-r.png       数据库的e-r图
+7. .env          环境配置
+8. middleware    中间件，实现了登陆验证
+9. serializer    一些序列化统一格式的操作
+10. server       要挂载的路由
+11. ffmpeg.exe   视频工具（上传视频时会用到）
 
+## 项目本地运行
+1. 下载安装[极简抖音APP](https://bytedance.feishu.cn/docs/doccnM9KkBAdyDhg8qaeGlIz7S7)
+2. 按照APP使用说明设置服务端地址
+3. 启动后端服务
+  - 初次运行，将`.env`中数据库连接设置为本地数据库
+  - 将model/init.go中的`migration()`取消注释（首次运行后可注释）
+  - 根目录下执行`run main.go`
 
-## 运行
-
-```
-go run main.go
-```
