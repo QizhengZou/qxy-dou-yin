@@ -80,9 +80,10 @@
 11. ffmpeg.exe   视频工具（上传视频时会用到）
 
 ## 项目本地运行
-1. 下载安装[极简抖音APP](https://bytedance.feishu.cn/docs/doccnM9KkBAdyDhg8qaeGlIz7S7)
+1. 安卓端下载安装[极简抖音APP](https://bytedance.feishu.cn/docs/doccnM9KkBAdyDhg8qaeGlIz7S7)
 2. 按照APP使用说明设置服务端地址
-3. 启动后端服务
+3. 下载[视频工具](https://ffbinaries.com/downloads)并解压到根目录
+4. 启动后端服务
   - 初次运行，将`.env`中数据库连接设置为本地数据库
   - 将model/init.go中的`migration()`取消注释（首次运行后可注释）
   - 根目录下执行
