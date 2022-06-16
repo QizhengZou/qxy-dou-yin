@@ -85,5 +85,8 @@
 3. 启动后端服务
   - 初次运行，将`.env`中数据库连接设置为本地数据库
   - 将model/init.go中的`migration()`取消注释（首次运行后可注释）
-  - 根目录下执行`run main.go`
+  - 根目录下执行
+ ```go
+ go run main.go
+ ```
 
